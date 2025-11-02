@@ -1,5 +1,5 @@
 {
-  "interval": "5m",
   "symbols": ["OPUSDT", "RENDERUSDT"],
+  "intervals": ["5m", "15m"],
   "limit": 100
 }
