@@ -1,9 +1,6 @@
 import os, json, requests, pandas as pd
 from datetime import datetime
 
-# ========== CONFIG ==========
-TEST_MODE = True  # Set True for testing, False for real EMA alerts
-
 # Load config (from repo)
 with open("config.json", "r") as f:
     cfg = json.load(f)
@@ -51,13 +48,6 @@ def check_symbol(symbol):
     ema9_now, ema9_prev = df["ema9"].iloc[-1], df["ema9"].iloc[-2]
     ema26_now, ema26_prev = df["ema26"].iloc[-1], df["ema26"].iloc[-2]
 
-    if TEST_MODE:
-        # 💡 Always send fake bullish cross for testing
-        msg = f"🚀 TEST MODE: Fake Bullish Cross on {symbol} ({cfg['interval']})"
-        send_telegram(msg)
-        print(msg)
-        return
-
     # ===== Real EMA cross logic =====
     if ema9_now > ema26_now and ema9_prev <= ema26_prev:
         msg = f"🚀 Bullish Cross! 9 EMA crossed ABOVE 26 EMA on {symbol} ({cfg['interval']})"
@@ -77,6 +67,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # 💡 Optional heartbeat message
-    if TEST_MODE:
-        send_telegram("✅ TEST MODE: EMA bot is running")
