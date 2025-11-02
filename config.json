@@ -1,0 +1,5 @@
+{
+  "interval": "5m",
+  "symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT"],
+  "limit": 100
+}
